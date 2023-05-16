@@ -6,8 +6,6 @@ import  styled  from "styled-components"
 const ContainerAnimation = styled.div`
   width: 250px;
   margin: 0 auto;
-
-
 `
 
 function MeuComponente() {

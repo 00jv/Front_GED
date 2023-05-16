@@ -11,27 +11,14 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listitems';
+import { mainListItems } from './listitems';
 import CardImagens from '@/Components/Card';
 import Animacao from '@/Components/Animacao';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
+import Copyright from '@/Components/footer';
+import FolderIcon from '@mui/icons-material/Folder';
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -122,11 +109,6 @@ function DashboardContent() {
             >
               Facilite
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -145,8 +127,6 @@ function DashboardContent() {
           <Divider />
           <List component="nav">
             {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
           </List>
         </Drawer>
         <Box
@@ -162,34 +142,62 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
+        
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {/* <Grid container spacing={3}>
-            
-              <Grid item xs={12} md={8} lg={9}>
-               
-                
-              </Grid>
-            
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-           
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid> */}
-            {images.length === 0 ?  <div><Animacao/></div>: <CardImagens/> }
+          {images.length === 0  ? <div><Animacao/></div> :
+          <>
+            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+              <div>
+                <IconButton>
+                  <FolderIcon style={{ fontSize: '15rem' }} />
+                </IconButton>
+                <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
+                  Selecione uma pasta
+                </Typography>
+              </div>
+            </div>
+            </>
+            } 
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
