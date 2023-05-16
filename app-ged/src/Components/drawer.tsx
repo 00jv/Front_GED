@@ -74,7 +74,6 @@ export default function SwipeableTemporaryDrawer({ toggleDrawer, state }: any) {
           <ListItemText primary="Sair" />
         </ListItemButton>
       </List>
-
     </Box>
   );
 
