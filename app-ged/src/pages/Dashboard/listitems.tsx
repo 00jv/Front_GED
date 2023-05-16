@@ -6,10 +6,24 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import PersonIcon from '@mui/icons-material/Person';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useRouter } from 'next/router';
 
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
+interface mainListItemsProps {
+  handleFolder: () => void;
+}
+
+
+export const mainListItems = ({handleFolder}: mainListItemsProps) => {
+  const router = useRouter();
+
+  function login() {
+    router.push('../Login');
+  }
+  
+  return (
+
+ <React.Fragment>
+    <ListItemButton onClick={() => handleFolder()}>
       <ListItemIcon>
         <CreateNewFolderIcon />
       </ListItemIcon>
@@ -27,7 +41,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Perfil" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton onClick={() => login()}>
       <ListItemIcon>
         <LogoutIcon />
       </ListItemIcon>
@@ -36,3 +50,4 @@ export const mainListItems = (
   </React.Fragment>
 );
 
+}

@@ -72,12 +72,17 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
-  const [images, setImages] = React.useState([]);
+  const [folder, setFolder] = React.useState(false);
+  const [documents, setDocuments] = React.useState([]);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
+  function handleFolder() {
+    setFolder(!folder);
+  }
+  
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -126,7 +131,7 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainListItems({handleFolder})}
           </List>
         </Drawer>
         <Box
@@ -144,7 +149,7 @@ function DashboardContent() {
           <Toolbar />
         
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          {images.length === 0  ? <div><Animacao/></div> :
+          {folder === false  ? <div><Animacao/></div> :
           <>
             <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
               <div>
