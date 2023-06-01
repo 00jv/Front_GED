@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import lottie from 'lottie-web';
 import animationData from './95083-file-search.json';
-import  styled  from "styled-components"
+import styled  from "styled-components"
 
 const ContainerAnimation = styled.div`
   width: 250px;

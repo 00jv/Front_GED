@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-
+import Files from '../Files';
 import Animacao from '@/Components/Animacao';
 import Copyright from '@/Components/footer';
 import FolderIcon from '@mui/icons-material/Folder';
@@ -55,7 +55,7 @@ function DashboardContent() {
           <Header />
 
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {folder === false ?
+            {folder === true ?
               <div>
                 <Animacao />
               </div> :
@@ -65,48 +65,8 @@ function DashboardContent() {
                     <IconButton>
                       <FolderIcon style={{ fontSize: '15rem' }} />
                     </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
-                    </Typography>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
-                    </Typography>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
-                    </Typography>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
-                    </Typography>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
-                    </Typography>
-                  </div>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ marginLeft: '3rem' }} component="h2" gutterBottom>
-                      Selecione uma pasta
+                    <Typography style={{ margin: '0 auto', display: 'flex', justifyContent: 'center'}} component="h2" gutterBottom>
+                      Documentações
                     </Typography>
                   </div>
                 </div>
