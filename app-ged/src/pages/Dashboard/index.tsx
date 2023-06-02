@@ -13,10 +13,15 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Files from '../Files';
-import Animacao from '@/Components/Animacao';
+import Animacao from '@/Components/AnimacaoFolder';
 import Copyright from '@/Components/footer';
 import FolderIcon from '@mui/icons-material/Folder';
 import Header from '@/Components/header';
+import api from '@/services/api';
+import Cookies from 'js-cookie';
+import ToastStyled from '@/Components/ToastStyled';
+import { useRouter } from 'next/router';
+import ModalPasta from '@/Components/ModalPasta';
 const drawerWidth: number = 240;
 
 
@@ -25,15 +30,43 @@ const drawerWidth: number = 240;
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const router = useRouter();
   const [folder, setFolder] = React.useState(false);
+  const userId = Cookies.get('userId')
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarType, setSnackbarType] = React.useState('');
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
+  const [pastas, setPastas] = React.useState([])
 
 
-  function handleFolder() {
-    setFolder(!folder);
+  const getPastas = async () => {
+    try {
+      const { data } = await api.get(`/users/getpastas/?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('token')}`
+        }
+      })
+     
+      setPastas(data.pastas)
+    } catch (error) {
+      setSnackbarOpen(true)
+      setSnackbarType('error');
+      setSnackbarMessage('Algo deu Errado :(.')
+    }
   }
 
 
+  const handleClick = () => {
+    setSnackbarOpen(false);
+  }
 
+  React.useEffect(() => {
+    getPastas()
+  }, [])
+
+  const filesPages = (id: string) => {
+    router.push(`/Files?idFolder=${id}`)
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -52,27 +85,31 @@ function DashboardContent() {
             overflow: 'auto',
           }}
         >
-          <Header />
+          <Header nome={'GED'} />
 
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {folder === true ?
+            {pastas.length === 0 ?
               <div>
                 <Animacao />
               </div> :
               <>
                 <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-                  <div>
-                    <IconButton>
-                      <FolderIcon style={{ fontSize: '15rem' }} />
-                    </IconButton>
-                    <Typography style={{ margin: '0 auto', display: 'flex', justifyContent: 'center'}} component="h2" gutterBottom>
-                      Documentações
-                    </Typography>
-                  </div>
+                  {pastas.map((item: any, index: number) => (
+                    <div key={index}>
+                      <IconButton onClick={() => filesPages(item.id)} >
+                        <FolderIcon style={{ fontSize: '15rem' }} />
+                      </IconButton>
+                      <Typography style={{ margin: '0 auto', display: 'flex', justifyContent: 'center' }} component="h2" gutterBottom>
+                        {item.nome}
+                      </Typography>
+                    </div>
+                  ))}
                 </div>
               </>
             }
             <Copyright sx={{ pt: 4 }} />
+
+            <ToastStyled open={snackbarOpen} handleClose={handleClick} type={snackbarType} message={snackbarMessage} />
           </Container>
         </Box>
       </Box>

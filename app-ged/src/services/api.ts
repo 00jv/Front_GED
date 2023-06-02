@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:4000/ged',
+  baseURL: 'https://backend-ged.vercel.app/api/ged',
 })
 
 export default api

@@ -52,12 +52,6 @@ export default function SwipeableTemporaryDrawer({ toggleDrawer, state }: any) {
           <ListItemText primary="Criar Pasta" />
         </ListItemButton>
         <Divider/>
-        <ListItemButton onClick={() => handleClickOpenFile()}>
-          <ListItemIcon>
-            <NoteAddIcon />
-          </ListItemIcon>
-          <ListItemText primary="Criar Arquivo" />
-        </ListItemButton>
         <Divider/>
         <ListItemButton onClick={() => login()}>
           <ListItemIcon>
@@ -80,7 +74,7 @@ export default function SwipeableTemporaryDrawer({ toggleDrawer, state }: any) {
         {list('left')}
       </SwipeableDrawer>
 
-      <ModalPasta handleClickOpen={handleClickOpenFolder} open={openFolder} />
+      <ModalPasta handleClickOpen={handleClickOpenFolder} open={openFolder} typeModal={'create'}/>
       <ModalFile handleClickOpen={handleClickOpenFile} open={openFile} />
     </div>
   );

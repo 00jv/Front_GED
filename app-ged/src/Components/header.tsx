@@ -54,7 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function SearchAppBar() {
+export default function SearchAppBar({nome}: any) {
     const [state, setState] = React.useState({
         left: false,
     });   
@@ -93,7 +93,7 @@ export default function SearchAppBar() {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        GED
+                        {nome}
                     </Typography>
                     <Search>
                         <SearchIconWrapper>

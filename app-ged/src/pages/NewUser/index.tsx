@@ -13,18 +13,63 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from '@/Components/footer';
-
+import { useRouter } from 'next/router';
+import ToasStyled from '@/Components/ToastStyled';
+import api from '@/services/api';
 const theme = createTheme();
 
 export default function SignUp() {
+  const router = useRouter();
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [snackbarType, setSnackbarType] = React.useState('');
+  const [snackbarMessage, setSnackbarMessage] = React.useState('');
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const email = data.get('email')
+    const password = data.get('password')
+
+    Newuser(email as string, password as string)
   };
+
+  const Newuser = async (email: string, password: string) => {
+    try {
+
+      const { data } = await api.post('/signup', {email, password})
+
+
+      if (data.message === 'Usuário criado com sucesso.') {
+        setSnackbarOpen(true)
+        setSnackbarType('success');
+        setSnackbarMessage('Cadastro feito com sucesso !!')
+        login()
+      } else if (data.message = "Este email já está em uso") {
+        setSnackbarOpen(true)
+        setSnackbarType('info');
+        setSnackbarMessage('Este email já está em uso.')
+      }
+    } catch (error: any) {
+      if (error.message = "Request failed with status code 400") {
+        setSnackbarOpen(true)
+        setSnackbarType('info');
+        setSnackbarMessage('Este email já está em uso.')
+        return;
+      }
+      setSnackbarOpen(true)
+      setSnackbarType('error');
+      setSnackbarMessage('Algo deu Errado :(.')
+    }
+  }
+
+  const handleClick = () => {
+    setSnackbarOpen(false);
+  }
+
+  const login = () => {
+    router.push('/Login')
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,7 +89,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Criar Novo Usuário
           </Typography>
-          <Box component="form"  onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -84,6 +129,7 @@ export default function SignUp() {
               </Grid>
             </Grid>
           </Box>
+          <ToasStyled open={snackbarOpen} handleClose={handleClick} type={snackbarType} message={snackbarMessage} />
         </Box>
         <Copyright sx={{ mt: 5 }} />
       </Container>
