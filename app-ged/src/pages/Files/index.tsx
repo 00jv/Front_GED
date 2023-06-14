@@ -28,7 +28,7 @@ const Files = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [openModalFolder, setOpenModalFolder] = React.useState(false);
 
-console.log(idFolder)
+
   const getArquivos = async () => {
     try {
       const { data } = await api.get(`/users/pastas/getarquivos/?userId=${Cookies.get('userId')}&folderId=${idFolder}`, {
@@ -38,8 +38,6 @@ console.log(idFolder)
       })
 
       setArquivos(data)
-
-      
     } catch (error) {
       console.log(error)
     }
@@ -58,7 +56,7 @@ console.log(idFolder)
     setOpenModalFolder(!openModalFolder);
   };
 
-  console.log(arquivos)
+
 
   return (
     <>
@@ -113,6 +111,7 @@ console.log(idFolder)
                           {arquivo.descricao ? arquivo.descricao : 'Sem descrição'}
                         </Typography>
                         <Button variant="text">Download</Button>
+                        <Button variant="text" color='error'>Apagar</Button>
                       </CardContent>
                     </Card>
                   ))}
@@ -120,7 +119,7 @@ console.log(idFolder)
               </Box>
             )}
 
-          <ModalFile handleClickOpen={handleClickOpenModal} open={openModal} idFolder={idFolder}/>
+          <ModalFile handleClickOpen={handleClickOpenModal} open={openModal} idFolder={idFolder} />
           <Fotter />
         </Box>
       </Box>

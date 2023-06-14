@@ -9,6 +9,7 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import MyDrawer from '@/Components/drawer';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -54,23 +55,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-export default function SearchAppBar({nome}: any) {
+export default function SearchAppBar({ nome }: any) {
     const [state, setState] = React.useState({
         left: false,
-    });   
+    });
     const toggleDrawer = (anchor: Anchor, open: boolean) =>
-            (event: React.KeyboardEvent | React.MouseEvent) => {
-                if (
-                    event &&
-                    event.type === 'keydown' &&
-                    ((event as React.KeyboardEvent).key === 'Tab' ||
-                        (event as React.KeyboardEvent).key === 'Shift')
-                ) {
-                    return;
-                }
+        (event: React.KeyboardEvent | React.MouseEvent) => {
+            if (
+                event &&
+                event.type === 'keydown' &&
+                ((event as React.KeyboardEvent).key === 'Tab' ||
+                    (event as React.KeyboardEvent).key === 'Shift')
+            ) {
+                return;
+            }
 
-                setState({ ...state, [anchor]: open });
-      };
+            setState({ ...state, [anchor]: open });
+        };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -87,11 +88,14 @@ export default function SearchAppBar({nome}: any) {
                     >
                         <MenuIcon />
                     </IconButton>
+                    <Box sx={{ marginTop: '0.5rem', marginRight: '1rem' }}>
+                        <ArrowCircleLeftIcon />
+                    </Box>
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, marginTop: '0.2rem' }}
                     >
                         {nome}
                     </Typography>
